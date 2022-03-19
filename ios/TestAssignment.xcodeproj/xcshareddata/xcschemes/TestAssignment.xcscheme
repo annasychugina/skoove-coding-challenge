@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "emmaContactsApp.app"
-               BlueprintName = "emmaContactsApp"
-               ReferencedContainer = "container:emmaContactsApp.xcodeproj">
+               BuildableName = "TestAssignment.app"
+               BlueprintName = "TestAssignment"
+               ReferencedContainer = "container:TestAssignment.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "emmaContactsAppTests.xctest"
-               BlueprintName = "emmaContactsAppTests"
-               ReferencedContainer = "container:emmaContactsApp.xcodeproj">
+               BuildableName = "TestAssignmentTests.xctest"
+               BlueprintName = "TestAssignmentTests"
+               ReferencedContainer = "container:TestAssignment.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "emmaContactsApp.app"
-            BlueprintName = "emmaContactsApp"
-            ReferencedContainer = "container:emmaContactsApp.xcodeproj">
+            BuildableName = "TestAssignment.app"
+            BlueprintName = "TestAssignment"
+            ReferencedContainer = "container:TestAssignment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "emmaContactsApp.app"
-            BlueprintName = "emmaContactsApp"
-            ReferencedContainer = "container:emmaContactsApp.xcodeproj">
+            BuildableName = "TestAssignment.app"
+            BlueprintName = "TestAssignment"
+            ReferencedContainer = "container:TestAssignment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

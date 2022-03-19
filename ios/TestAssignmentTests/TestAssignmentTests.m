@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface emmaContactsAppTests : XCTestCase
+@interface TestAssignmentTests : XCTestCase
 
 @end
 
-@implementation emmaContactsAppTests
+@implementation TestAssignmentTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
