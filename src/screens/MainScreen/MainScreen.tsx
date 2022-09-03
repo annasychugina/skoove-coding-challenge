@@ -3,10 +3,10 @@ import {Header} from '@shared/ui/Header';
 import {RootStackParamList} from '@shared/config';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Container} from './styles';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {fetchSongsList} from '@entities/song/async/fetchSongsList';
 import {AppDispatch} from '@entities/store';
-import {selectAllSongs} from '@entities/song/model/songs';
+import {SkoovinSongsList} from '@features/skoovin-songs-list';
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList>;
@@ -15,8 +15,6 @@ type Props = {
 export const MainScreen = ({navigation}: Props) => {
   console.log(navigation);
   const dispatch = useDispatch<AppDispatch>();
-  const songsList = useSelector(selectAllSongs);
-  console.log('songsList', songsList);
 
   useEffect(() => {
     dispatch(fetchSongsList());
@@ -24,7 +22,8 @@ export const MainScreen = ({navigation}: Props) => {
 
   return (
     <Container>
-      <Header title="Test" showBackButton={false} />
+      <Header title="Skoovin'" showBackButton={false} />
+      <SkoovinSongsList />
     </Container>
   );
 };

@@ -5,8 +5,6 @@ import {ApiSong} from '@shared/api/models';
 import {RootState} from '../../store';
 import {uuidv4} from '@shared/lib/utils/uuid';
 
-const UUID = uuidv4();
-
 export type Song = ApiSong & {
   id: string;
 };
@@ -33,7 +31,7 @@ const songs = createSlice({
             state,
             payload.data.map(item => {
               return {
-                id: UUID,
+                id: uuidv4(),
                 ...item,
               };
             }),
@@ -58,4 +56,7 @@ export const {
   selectById: selectSongById,
   selectAll: selectAllSongs,
   selectEntities: selectAllSongsEntities,
-} = adapter.getSelectors<RootState>(state => state.songs);
+} = adapter.getSelectors<RootState>(state => {
+  console.log('ff', state);
+  return state.songs;
+});
