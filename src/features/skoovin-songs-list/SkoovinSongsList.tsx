@@ -6,8 +6,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ItemsList} from '@shared/ui/ItemsList';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
-import {addFavorite, removeFavorite} from '@entities/song/model/favorites';
-import {RootState} from '@entities/store';
+import {
+  addFavorite,
+  removeFavorite,
+  selectFavorites,
+} from '@entities/song/model/favorites';
 
 type Props = {} & FlatListProps<Song>;
 
@@ -16,8 +19,7 @@ const keyExtractor = (item: Song) => item.id.toString();
 export const SkoovinSongsList = () => {
   const dispatch = useDispatch();
   const songsList = useSelector(selectAllSongs);
-  const favoriteItem = useSelector((state: RootState) => state.favorites);
-  console.log('favoriteItem', favoriteItem);
+  const favoriteItem = useSelector(selectFavorites);
   const handlePressCard = useCallback(() => {
     // TODO navigate
   }, []);
@@ -34,6 +36,7 @@ export const SkoovinSongsList = () => {
     const isLiked = item.id === favoriteItem.favoriteId;
     return (
       <SongPreviewCard
+        key={item.id}
         {...item}
         onPress={handlePressCard}
         isLiked={isLiked}

@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from '@entities/store';
 
 type EntityID = string;
 
@@ -29,3 +30,5 @@ export const favoritesSlice = createSlice({
 export const {reducer: favoritesReducer} = favoritesSlice;
 
 export const {addFavorite, removeFavorite} = favoritesSlice.actions;
+
+export const selectFavorites = (state: RootState) => state.favorites;

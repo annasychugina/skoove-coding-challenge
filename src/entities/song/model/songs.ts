@@ -56,7 +56,4 @@ export const {
   selectById: selectSongById,
   selectAll: selectAllSongs,
   selectEntities: selectAllSongsEntities,
-} = adapter.getSelectors<RootState>(state => {
-  console.log('ff', state);
-  return state.songs;
-});
+} = adapter.getSelectors<RootState>(state => state.songs);
