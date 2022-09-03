@@ -5,7 +5,7 @@ import {StatusBar, useColorScheme} from 'react-native';
 import {Root} from './src/app/navigators/Root';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from '@shared/lib/theme';
-import {store} from '@shared/store';
+import {store} from '@entities/store';
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
