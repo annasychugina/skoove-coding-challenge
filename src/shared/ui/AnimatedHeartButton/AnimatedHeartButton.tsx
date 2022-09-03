@@ -3,6 +3,7 @@ import {Animated, Pressable, PressableProps} from 'react-native';
 import styled from 'styled-components/native';
 import {Colors} from '@shared/lib/theme';
 import type {ComponentType} from 'react';
+import {rem} from '@shared/ui/helpers';
 type Props = {
   isLiked: boolean | undefined;
   onPress?: () => void | Promise<void>;
@@ -23,10 +24,12 @@ const springConfig = {
   mass: 0.8,
 };
 
+const DEFAULT_SIZE = rem(28);
+
 export const AnimatedHeartButton: React.FC<Props> = ({
   onPress,
   isLiked = false,
-  size = 28,
+  size = DEFAULT_SIZE,
   showRipple = false,
   disabled,
 }) => {
@@ -54,7 +57,7 @@ export const AnimatedHeartButton: React.FC<Props> = ({
     } else {
       didMount.current = true;
     }
-  }, [animateHeart, isLiked]);
+  }, [isLiked]);
 
   const style = useMemo(
     () => ({

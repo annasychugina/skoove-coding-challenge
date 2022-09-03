@@ -2,29 +2,45 @@ import React, {useCallback} from 'react';
 import type {FlatListProps, ListRenderItem} from 'react-native';
 import {SongPreviewCard} from './SongPreviewCard';
 import {selectAllSongs, Song} from '@entities/song/model/songs';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ItemsList} from '@shared/ui/ItemsList';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
+import {addFavorite, removeFavorite} from '@entities/song/model/favorites';
+import {RootState} from '@entities/store';
 
 type Props = {} & FlatListProps<Song>;
 
 const keyExtractor = (item: Song) => item.id.toString();
 
 export const SkoovinSongsList = () => {
+  const dispatch = useDispatch();
   const songsList = useSelector(selectAllSongs);
+  const favoriteItem = useSelector((state: RootState) => state.favorites);
+  console.log('favoriteItem', favoriteItem);
   const handlePressCard = useCallback(() => {
     // TODO navigate
   }, []);
-  const handleLike = useCallback(() => {}, []);
-  const renderSongItem: ListRenderItem<Song> = ({item}) => (
-    <SongPreviewCard
-      {...item}
-      onPress={handlePressCard}
-      isLiked={false}
-      onHeartPress={handleLike}
-    />
-  );
+
+  const toggleLike = (item: Song, isLiked: boolean) => () => {
+    if (isLiked) {
+      dispatch(removeFavorite(item.id));
+    } else {
+      dispatch(addFavorite(item.id));
+    }
+  };
+
+  const renderSongItem: ListRenderItem<Song> = ({item}) => {
+    const isLiked = item.id === favoriteItem.favoriteId;
+    return (
+      <SongPreviewCard
+        {...item}
+        onPress={handlePressCard}
+        isLiked={isLiked}
+        onHeartPress={toggleLike(item, isLiked)}
+      />
+    );
+  };
   return (
     <SongsList
       testID="songsList"
