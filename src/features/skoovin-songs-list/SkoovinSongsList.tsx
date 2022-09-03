@@ -12,38 +12,50 @@ import {
   selectFavorites,
 } from '@entities/song/model/favorites';
 
-type Props = {} & FlatListProps<Song>;
+type Props = {
+  onCardPress: (id: string) => void;
+};
 
 const keyExtractor = (item: Song) => item.id.toString();
 
-export const SkoovinSongsList = () => {
+export const SkoovinSongsList = ({onCardPress}: Props) => {
   const dispatch = useDispatch();
   const songsList = useSelector(selectAllSongs);
   const favoriteItem = useSelector(selectFavorites);
-  const handlePressCard = useCallback(() => {
-    // TODO navigate
-  }, []);
 
-  const toggleLike = (item: Song, isLiked: boolean) => () => {
-    if (isLiked) {
-      dispatch(removeFavorite(item.id));
-    } else {
-      dispatch(addFavorite(item.id));
-    }
-  };
+  const toggleLike = useCallback(
+    (item: Song, isLiked: boolean) => () => {
+      if (isLiked) {
+        dispatch(removeFavorite(item.id));
+      } else {
+        dispatch(addFavorite(item.id));
+      }
+    },
+    [dispatch],
+  );
 
-  const renderSongItem: ListRenderItem<Song> = ({item}) => {
-    const isLiked = item.id === favoriteItem.favoriteId;
-    return (
-      <SongPreviewCard
-        key={item.id}
-        {...item}
-        onPress={handlePressCard}
-        isLiked={isLiked}
-        onHeartPress={toggleLike(item, isLiked)}
-      />
-    );
-  };
+  const handlePressCard = useCallback(
+    (item: Song) => () => {
+      onCardPress(item.id);
+    },
+    [onCardPress],
+  );
+
+  const renderSongItem: ListRenderItem<Song> = useCallback(
+    ({item}) => {
+      const isLiked = item.id === favoriteItem.favoriteId;
+      return (
+        <SongPreviewCard
+          key={item.id}
+          {...item}
+          onPress={handlePressCard(item)}
+          isLiked={isLiked}
+          onHeartPress={toggleLike(item, isLiked)}
+        />
+      );
+    },
+    [favoriteItem.favoriteId, handlePressCard, toggleLike],
+  );
   return (
     <SongsList
       testID="songsList"
