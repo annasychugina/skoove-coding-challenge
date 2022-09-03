@@ -9,7 +9,7 @@ yarn
 ### IOS
 ```
 cd ios
-bundle install (optional)
+bundle install (if no cocoapods)
 pod install
 yarn ios
 ```
