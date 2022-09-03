@@ -4,6 +4,8 @@ import {SongPreviewCard} from './SongPreviewCard';
 import {selectAllSongs, Song} from '@entities/song/model/songs';
 import {useSelector} from 'react-redux';
 import {ItemsList} from '@shared/ui/ItemsList';
+import styled from 'styled-components/native';
+import {rem} from '@shared/ui/helpers';
 
 type Props = {} & FlatListProps<Song>;
 
@@ -14,15 +16,29 @@ export const SkoovinSongsList = () => {
   const handlePressCard = useCallback(() => {
     // TODO navigate
   }, []);
+  const handleLike = useCallback(() => {}, []);
   const renderSongItem: ListRenderItem<Song> = ({item}) => (
-    <SongPreviewCard {...item} onPress={handlePressCard} />
+    <SongPreviewCard
+      {...item}
+      onPress={handlePressCard}
+      isLiked={false}
+      onHeartPress={handleLike}
+    />
   );
   return (
-    <ItemsList<Song>
+    <SongsList
       testID="songsList"
+      initialNumToRender={4}
       keyExtractor={keyExtractor}
       data={songsList}
       renderItem={renderSongItem}
     />
   );
 };
+
+export const SongsList = styled(ItemsList).attrs(() => ({
+  contentContainerStyle: {
+    paddingHorizontal: rem(16),
+    flexGrow: 1,
+  },
+}))`` as React.FC<FlatListProps<Song>>;

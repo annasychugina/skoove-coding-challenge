@@ -8,7 +8,13 @@ export const Stack = createStackNavigator<RootStackParamList>();
 export const Root = () => {
   return (
     <Stack.Navigator initialRouteName={EScreens.MAIN_SCREEN}>
-      <Stack.Screen name={EScreens.MAIN_SCREEN} component={MainScreen} />
+      <Stack.Screen
+        name={EScreens.MAIN_SCREEN}
+        component={MainScreen}
+        options={{
+          title: "Skoovin'",
+        }}
+      />
     </Stack.Navigator>
   );
 };

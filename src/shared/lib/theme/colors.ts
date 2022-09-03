@@ -6,4 +6,5 @@ export enum Colors {
   white = '#ffffff',
   alabaster = '#FAF9FA',
   porcelain = '#E7E9EB',
+  gray = '#C0C1C6',
 }
