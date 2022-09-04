@@ -11,6 +11,7 @@ import {AnimatedHeartButton} from '@shared/ui/AnimatedHeartButton';
 const {TitleBold2} = Typography;
 
 type Props = Song & {
+  title?: string;
   isLiked: boolean;
   showRating?: boolean;
   onPress?: () => void;
@@ -30,43 +31,42 @@ export const SongPreviewCard: React.FC<Props> = memo(
     onHeartPress,
     children,
   }) => {
-    const renderContent = () => {
-      return (
-        <>
-          <StyledImage
-            source={{uri: cover}}
-            resizeMode={FastImage.resizeMode.cover}>
-            <View>{children}</View>
-            {showRating && (
-              <TopWrapperAbsolute>
-                <RatingBlock rating={rating} />
-              </TopWrapperAbsolute>
-            )}
-            {!!title && (
-              <TitleWrapper height={HEAR_BUTTON_SIZE}>
-                <TitleBold2 textAlign="center" color={Colors.black}>
-                  {title}
-                </TitleBold2>
-              </TitleWrapper>
-            )}
-            <BottomRightWrapperAbsolute>
-              <AnimatedHeartButton
-                isLiked={isLiked}
-                onPress={onHeartPress}
-                size={HEAR_BUTTON_SIZE}
-              />
-            </BottomRightWrapperAbsolute>
-          </StyledImage>
-        </>
-      );
-    };
     return (
       <Container testID="songCard">
         {typeof onPress === 'function' ? (
-          <StyledPressable onPress={onPress}>{renderContent}</StyledPressable>
+          <StyledPressable onPress={onPress}>
+            <StyledImage
+              source={{uri: cover}}
+              resizeMode={FastImage.resizeMode.cover}>
+              <View>{children}</View>
+              {showRating && (
+                <TopWrapperAbsolute>
+                  <RatingBlock rating={rating} />
+                </TopWrapperAbsolute>
+              )}
+              {!!title && (
+                <TitleWrapper height={HEAR_BUTTON_SIZE}>
+                  <TitleBold2 textAlign="center" color={Colors.black}>
+                    {title}
+                  </TitleBold2>
+                </TitleWrapper>
+              )}
+              <BottomRightWrapperAbsolute>
+                <AnimatedHeartButton
+                  isLiked={isLiked}
+                  onPress={onHeartPress}
+                  size={HEAR_BUTTON_SIZE}
+                />
+              </BottomRightWrapperAbsolute>
+            </StyledImage>
+          </StyledPressable>
         ) : (
           <View>
-            {renderContent()}
+            <StyledImage
+              source={{uri: cover}}
+              resizeMode={FastImage.resizeMode.cover}>
+              <View>{children}</View>
+            </StyledImage>
             <TitleWrapper height={HEAR_BUTTON_SIZE} />
             <BottomRightWrapperAbsolute>
               <AnimatedHeartButton

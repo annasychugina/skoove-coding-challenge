@@ -7,7 +7,7 @@ import {useRoute} from '@react-navigation/native';
 import type {RouteProp} from '@react-navigation/native';
 import {useSetScreenOptions} from '@shared/hooks';
 import {selectSongById} from '@entities/song/model/songs';
-
+import {ActivityIndicator} from 'react-native';
 import {PlayPauseButton} from './components/PlayPauseButton';
 import {SongPreviewCard} from '@entities/song/ui/SongPreviewCard';
 import {selectFavorites} from '@entities/song/model/favorites';
@@ -40,25 +40,32 @@ export const TrackPlayer = () => {
     togglePlay,
   } = usePlayer(songItem);
 
+  if (!songItem) {
+    return null;
+  }
+
   return (
     <Container>
-      {songItem && (
-        <SongPreviewCard
-          {...songItem}
-          title={''}
-          showRating={false}
-          isLiked={isLiked}
-          onHeartPress={toggleLike(songItem, isLiked)}>
-          <PlayPauseButton onPress={togglePlay} />
-        </SongPreviewCard>
+      {duration <= 0 ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <SongPreviewCard
+            {...songItem}
+            showRating={false}
+            isLiked={isLiked}
+            onHeartPress={toggleLike(songItem, isLiked)}>
+            <PlayPauseButton onPress={togglePlay} />
+          </SongPreviewCard>
+          <Progress
+            onSlidingStart={onSlidingStart}
+            onSlidingComplete={onSlidingComplete}
+            duration={duration}
+            position={position}
+            value={sliderValue}
+          />
+        </>
       )}
-      <Progress
-        onSlidingStart={onSlidingStart}
-        onSlidingComplete={onSlidingComplete}
-        duration={duration}
-        position={position}
-        value={sliderValue}
-      />
     </Container>
   );
 };
