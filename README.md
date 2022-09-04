@@ -1,11 +1,12 @@
-# Test Assignment
+# Skoove Coding Challenge
+
+[Test assignment](https://github.com/Learnfield-GmbH/CodingChallenge/tree/master/shared/simple%20audio%20player)
 
 ### How to start
 
 ``
 yarn 
 ``
-
 ### IOS
 ```
 cd ios
@@ -13,7 +14,6 @@ bundle install (if no cocoapods)
 pod install
 yarn ios
 ```
-
 ### Android
 ```
 yarn android
@@ -69,15 +69,16 @@ I've chosen [React Native Styled Components](https://styled-components.com/docs/
 
 I've added [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) for caching cover image and optimization
 
-[react-native-svg](https://github.com/react-native-svg/react-native-svg) for 2 icons play and pause button
+I've added [react-native-svg](https://github.com/react-native-svg/react-native-svg) for 2 icons play and pause button
 
-[@react-native-community/slider](https://www.npmjs.com/package/@react-native-community/slider) for slider
+I've added [@react-native-community/slider](https://www.npmjs.com/package/@react-native-community/slider) for slider
 
-[axios](https://www.npmjs.com/package/axios) for queries (also universal and expandable thing)
+I've added [axios](https://www.npmjs.com/package/axios) for queries (also universal and expandable thing)
 
 Didn't have time to write the tests but primarily covered business logic using jest (reducers, utils with formatinng date), then hooks and components using
 
 [React Native Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/)
+
 [React Native Testing Hooks Library](https://github.com/testing-library/react-hooks-testing-library)
 
 Now when entering a new track screen the jump stops. The description does not say about it, so I thought it is the simplest and best option.
