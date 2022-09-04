@@ -2,15 +2,12 @@ import React, {useCallback} from 'react';
 import type {FlatListProps, ListRenderItem} from 'react-native';
 import {SongPreviewCard} from '@entities/song/ui/SongPreviewCard';
 import {selectAllSongs, Song} from '@entities/song/model/songs';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {ItemsList} from '@shared/ui/ItemsList';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
-import {
-  addFavorite,
-  removeFavorite,
-  selectFavorites,
-} from '@entities/song/model/favorites';
+import {selectFavorites} from '@entities/song/model/favorites';
+import {useFavorite} from '@entities/song/hooks';
 
 type Props = {
   onCardPress: (id: string) => void;
@@ -19,20 +16,9 @@ type Props = {
 const keyExtractor = (item: Song) => item.id.toString();
 
 export const SkoovinSongsList = ({onCardPress}: Props) => {
-  const dispatch = useDispatch();
   const songsList = useSelector(selectAllSongs);
   const favoriteItem = useSelector(selectFavorites);
-
-  const toggleLike = useCallback(
-    (item: Song, isLiked: boolean) => () => {
-      if (isLiked) {
-        dispatch(removeFavorite(item.id));
-      } else {
-        dispatch(addFavorite(item.id));
-      }
-    },
-    [dispatch],
-  );
+  const {toggleLike} = useFavorite();
 
   const handlePressCard = useCallback(
     (item: Song) => () => {

@@ -24,17 +24,15 @@ export const PlayPauseButton: React.FC<Props> = ({onPress}) => {
   }
 
   return (
-    <ButtonContainer onPress={onPress}>
+    <Pressable onPress={onPress}>
       {isPlaying ? (
         <IconPause size={BUTTON_SIZE} />
       ) : (
         <IconPlay size={BUTTON_SIZE} />
       )}
-    </ButtonContainer>
+    </Pressable>
   );
 };
-
-const ButtonContainer = styled(Pressable)({});
 
 const StatusContainer = styled.View({
   height: rem(40),

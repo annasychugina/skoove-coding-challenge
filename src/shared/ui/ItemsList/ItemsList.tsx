@@ -25,7 +25,6 @@ export const ItemsList = <T,>({
   keyExtractor,
   ...itemsListProps
 }: Props<T>) => {
-  console.log('data', data)
   return (
     <FlatList
       style={style}
