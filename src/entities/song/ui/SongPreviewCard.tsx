@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-
+import {View} from 'react-native';
 import {Colors} from '@shared/lib/theme';
 import {Typography} from '@shared/ui/Typography';
 import {Song} from '@entities/song/model/songs';
@@ -12,31 +12,69 @@ const {TitleBold2} = Typography;
 
 type Props = Song & {
   isLiked: boolean;
-  onPress: () => void;
+  showRating?: boolean;
+  onPress?: () => void;
   onHeartPress: () => void;
 };
 
+const HEAR_BUTTON_SIZE = rem(28);
+
 export const SongPreviewCard = memo(
-  ({title, cover, isLiked, onPress, rating, onHeartPress}: Props) => {
-    return (
-      <Container testID="songCard">
-        <StyledPressable onPress={onPress}>
+  ({
+    title,
+    cover,
+    isLiked,
+    onPress,
+    rating,
+    showRating = true,
+    onHeartPress,
+  }: Props) => {
+    const renderContent = () => {
+      return (
+        <>
           <StyledImage
             source={{uri: cover}}
             resizeMode={FastImage.resizeMode.cover}
           />
-          <TopWrapperAbsolute>
-            <RatingBlock rating={rating} />
-          </TopWrapperAbsolute>
-          <TitleWrapper>
-            <TitleBold2 textAlign="center" color={Colors.black}>
-              {title}
-            </TitleBold2>
-          </TitleWrapper>
+          {showRating && (
+            <TopWrapperAbsolute>
+              <RatingBlock rating={rating} />
+            </TopWrapperAbsolute>
+          )}
+          {!!title && (
+            <TitleWrapper height={HEAR_BUTTON_SIZE}>
+              <TitleBold2 textAlign="center" color={Colors.black}>
+                {title}
+              </TitleBold2>
+            </TitleWrapper>
+          )}
           <BottomRightWrapperAbsolute>
-            <AnimatedHeartButton isLiked={isLiked} onPress={onHeartPress} />
+            <AnimatedHeartButton
+              isLiked={isLiked}
+              onPress={onHeartPress}
+              size={HEAR_BUTTON_SIZE}
+            />
           </BottomRightWrapperAbsolute>
-        </StyledPressable>
+        </>
+      );
+    };
+    return (
+      <Container testID="songCard">
+        {typeof onPress === 'function' ? (
+          <StyledPressable onPress={onPress}>{renderContent}</StyledPressable>
+        ) : (
+          <View>
+            {renderContent()}
+            <TitleWrapper height={HEAR_BUTTON_SIZE} />
+            <BottomRightWrapperAbsolute>
+              <AnimatedHeartButton
+                isLiked={isLiked}
+                onPress={onHeartPress}
+                size={HEAR_BUTTON_SIZE}
+              />
+            </BottomRightWrapperAbsolute>
+          </View>
+        )}
       </Container>
     );
   },
@@ -65,14 +103,15 @@ const BottomRightWrapperAbsolute = styled.View({
   right: rem(16),
 });
 
-const TitleWrapper = styled.View({
+const TitleWrapper = styled.View<{height: number}>(({height}) => ({
   position: 'absolute',
   backgroundColor: Colors.white,
   opacity: 0.6,
   width: '100%',
   paddingVertical: rem(4),
   bottom: 0,
-});
+  height: height,
+}));
 
 const StyledPressable = styled.Pressable.attrs(() => ({
   android_ripple: {

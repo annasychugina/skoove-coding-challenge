@@ -287,6 +287,11 @@ PODS:
     - RCTTypeSafety
     - React
     - ReactCommon/turbomodule/core
+  - react-native-slider (4.3.1):
+    - React-Core
+  - react-native-track-player (3.1.0):
+    - React-Core
+    - SwiftAudioEx (= 0.15.2)
   - React-perflogger (0.67.4)
   - React-RCTActionSheet (0.67.4):
     - React-Core/RCTActionSheetHeaders (= 0.67.4)
@@ -356,41 +361,17 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNGestureHandler (2.3.2):
+  - RNGestureHandler (1.9.0):
     - React-Core
-  - RNReanimated (2.10.0):
-    - DoubleConversion
-    - FBLazyVector
-    - FBReactNativeSpec
-    - glog
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
-    - React-callinvoker
+  - RNSVG (13.1.0):
     - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
-    - ReactCommon/turbomodule/core
-    - Yoga
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - SDWebImageWebPCoder (0.8.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
+  - SwiftAudioEx (0.15.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -438,6 +419,8 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
+  - react-native-track-player (from `../node_modules/react-native-track-player`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -452,7 +435,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -473,6 +456,7 @@ SPEC REPOS:
     - OpenSSL-Universal
     - SDWebImage
     - SDWebImageWebPCoder
+    - SwiftAudioEx
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -512,6 +496,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
+  react-native-track-player:
+    :path: "../node_modules/react-native-track-player"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -540,8 +528,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -578,6 +566,8 @@ SPEC CHECKSUMS:
   React-jsinspector: f4775ea9118cbe1f72b834f0f842baa7a99508d8
   React-logger: a1f028f6d8639a3f364ef80419e5e862e1115250
   react-native-safe-area-context: 806f8370bf9fc9db90a3413aaa1aab0d2e22fdf3
+  react-native-slider: d3ae4270cf8a8cc45a69912db0cc42b151560d5a
+  react-native-track-player: 12c7bdc776f11c382c11fecdade3743ebe0af78c
   React-perflogger: 0afaf2f01a47fd0fc368a93bfbb5bd3b26db6e7f
   React-RCTActionSheet: 59f35c4029e0b532fc42114241a06e170b7431a2
   React-RCTAnimation: aae4f4bed122e78bdab72f7118d291d70a932ce2
@@ -591,10 +581,11 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: a9d3c82ddf7ffdad9fbe6a81c6d6f8c06385464d
   ReactCommon: 07d0c460b9ba9af3eaf1b8f5abe7daaad28c9c4e
   RNFastImage: 72a2d5802adef70f8e42fce486f78878f8b47dae
-  RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
-  RNReanimated: c38d82b0e910e2478439686c58c02bac6e4232e9
+  RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
+  RNSVG: 1153e8eeb34c788841016c517dba9f57f20b762f
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
+  SwiftAudioEx: 1974c2eb942c9b54f58c3d3f5d704da527e2c5ba
   Yoga: d6b6a80659aa3e91aaba01d0012e7edcbedcbecd
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

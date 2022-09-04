@@ -7,7 +7,6 @@ import {EntityState} from '@reduxjs/toolkit';
 import {fetchSongsList} from '../async/fetchSongsList';
 import {ApiSong} from '@shared/api/models';
 import {RootState} from '../../store';
-import {uuidv4} from '@shared/lib/utils/uuid';
 
 type EntityID = string;
 
@@ -54,9 +53,9 @@ const songs = createSlice({
         if (payload.data.length > 0) {
           adapter.upsertMany(
             state,
-            payload.data.map(item => {
+            payload.data.map((item, index) => {
               return {
-                id: uuidv4(),
+                id: String(index),
                 ...item,
                 rating: 0,
               };

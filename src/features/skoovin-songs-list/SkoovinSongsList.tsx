@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import type {FlatListProps, ListRenderItem} from 'react-native';
-import {SongPreviewCard} from './SongPreviewCard';
+import {SongPreviewCard} from '@entities/song/ui/SongPreviewCard';
 import {selectAllSongs, Song} from '@entities/song/model/songs';
 import {useDispatch, useSelector} from 'react-redux';
 import {ItemsList} from '@shared/ui/ItemsList';
@@ -70,6 +70,5 @@ export const SkoovinSongsList = ({onCardPress}: Props) => {
 export const SongsList = styled(ItemsList).attrs(() => ({
   contentContainerStyle: {
     paddingHorizontal: rem(16),
-    flexGrow: 1,
   },
 }))`` as React.FC<FlatListProps<Song>>;

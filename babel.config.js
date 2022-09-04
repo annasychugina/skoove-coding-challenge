@@ -14,7 +14,6 @@ module.exports = {
         },
       },
     ],
-    'react-native-reanimated/plugin',
   ],
   env: {
     development: {
