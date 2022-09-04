@@ -70,9 +70,11 @@ export const SongAudioScreen = () => {
           showRating={false}
           isLiked={isLiked}
           onHeartPress={toggleLike(songItem, isLiked)}
-        />
+       >
+          <PlayPauseButton onPress={togglePlay} />
+        </SongPreviewCard>
       )}
-      <PlayPauseButton onPress={togglePlay} />
+
       <Progress
         onSlidingStart={onSlidingStart}
         onSlidingComplete={onSlidingComplete}

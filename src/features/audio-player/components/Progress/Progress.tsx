@@ -6,7 +6,7 @@ import {rem} from '@shared/ui/helpers';
 import {Typography} from '@shared/ui/Typography';
 import {formatTime} from '../../utils';
 
-const {NormalRegular} = Typography;
+const {TitleBold2} = Typography;
 
 type Props = SliderProps & {position: number; duration: number};
 
@@ -25,14 +25,14 @@ export const Progress: React.FC<Props> = ({
         value={value}
         minimumValue={0}
         maximumValue={1}
-        thumbTintColor={Colors.linkWater}
+        thumbTintColor={Colors.black}
         minimumTrackTintColor={Colors.gray}
         maximumTrackTintColor={Colors.black}
         onSlidingComplete={onSlidingComplete}
         onSlidingStart={onSlidingStart}
       />
       <LabelTextContainer>
-        <NormalRegular>{`${currentTime} / ${totalTime}`}</NormalRegular>
+        <TitleBold2>{`${currentTime} / ${totalTime}`}</TitleBold2>
       </LabelTextContainer>
     </>
   );
@@ -40,7 +40,6 @@ export const Progress: React.FC<Props> = ({
 
 const StyledSlider = styled(Slider)({
   flexDirection: 'row',
-  marginTop: 20,
   height: rem(40),
   width: rem(380),
 });
@@ -48,4 +47,5 @@ const StyledSlider = styled(Slider)({
 const LabelTextContainer = styled.View({
   flexDirection: 'row',
   justifyContent: 'center',
+  marginBottom: rem(10)
 });

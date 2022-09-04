@@ -7,7 +7,7 @@ interface Props extends SvgProps {
   color?: string;
 }
 
-export const IconPlay = ({size, color = Colors.black, ...rest}: Props) => (
+export const IconPlay = ({size, color = Colors.white, ...rest}: Props) => (
   <Svg viewBox="0 0 142.448 142.448" width={size} height={size} {...rest}>
     <Path
       fill={color}

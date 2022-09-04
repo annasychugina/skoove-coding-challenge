@@ -1,5 +1,6 @@
 import React from 'react';
-import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
+import styled from 'styled-components/native';
+import {ActivityIndicator, Pressable} from 'react-native';
 import {usePlaybackState, State} from 'react-native-track-player';
 import {IconPlay} from '@shared/ui/icons/IconPlay';
 import {IconPause} from '@shared/ui/icons/IconPause';
@@ -9,6 +10,8 @@ type Props = {
   onPress: () => void;
 };
 
+const BUTTON_SIZE = rem(95);
+
 export const PlayPauseButton: React.FC<Props> = ({onPress}) => {
   const state = usePlaybackState();
   const isPlaying = state === State.Playing;
@@ -16,23 +19,25 @@ export const PlayPauseButton: React.FC<Props> = ({onPress}) => {
 
   if (isLoading) {
     return (
-      <View style={styles.statusContainer}>
-        {isLoading && <ActivityIndicator />}
-      </View>
+      <StatusContainer>{isLoading && <ActivityIndicator />}</StatusContainer>
     );
   }
 
   return (
-    <Pressable onPress={onPress}>
-      {isPlaying ? <IconPause size={rem(40)} /> : <IconPlay size={rem(40)} />}
-    </Pressable>
+    <ButtonContainer onPress={onPress}>
+      {isPlaying ? (
+        <IconPause size={BUTTON_SIZE} />
+      ) : (
+        <IconPlay size={BUTTON_SIZE} />
+      )}
+    </ButtonContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  statusContainer: {
-    height: 40,
-    marginTop: 20,
-    marginBottom: 60,
-  },
+const ButtonContainer = styled(Pressable)({});
+
+const StatusContainer = styled.View({
+  height: rem(40),
+  marginTop: rem(20),
+  marginBottom: rem(60),
 });

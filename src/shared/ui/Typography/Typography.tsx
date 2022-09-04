@@ -36,11 +36,9 @@ const TitleBold = styled(bold)(createFS(20, 21));
 const TitleRegular = styled(regular)(createFS(20, 21));
 const TitleBold2 = styled(bold)(createFS(16, 21));
 const TitleBold3 = styled(bold)(createFS(22, 21));
-const NormalRegular = styled(regular)(createFS(14, 16));
 export const Typography = {
   TitleBold,
   TitleBold2,
   TitleBold3,
   TitleRegular,
-  NormalRegular,
 };

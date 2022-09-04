@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, PropsWithChildren} from 'react';
 import {View} from 'react-native';
 import {Colors} from '@shared/lib/theme';
 import {Typography} from '@shared/ui/Typography';
@@ -19,7 +19,7 @@ type Props = Song & {
 
 const HEAR_BUTTON_SIZE = rem(28);
 
-export const SongPreviewCard = memo(
+export const SongPreviewCard: React.FC<Props> = memo(
   ({
     title,
     cover,
@@ -28,14 +28,16 @@ export const SongPreviewCard = memo(
     rating,
     showRating = true,
     onHeartPress,
-  }: Props) => {
+    children,
+  }) => {
     const renderContent = () => {
       return (
         <>
           <StyledImage
             source={{uri: cover}}
-            resizeMode={FastImage.resizeMode.cover}
-          />
+            resizeMode={FastImage.resizeMode.cover}>
+            <View>{children}</View>
+          </StyledImage>
           {showRating && (
             <TopWrapperAbsolute>
               <RatingBlock rating={rating} />
@@ -108,7 +110,6 @@ const TitleWrapper = styled.View<{height: number}>(({height}) => ({
   backgroundColor: Colors.white,
   opacity: 0.6,
   width: '100%',
-  paddingVertical: rem(4),
   bottom: 0,
   height: height,
 }));

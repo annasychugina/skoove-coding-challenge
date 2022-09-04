@@ -2,9 +2,7 @@
 export enum Colors {
   black = '#000000',
   linkWater = '#CFE0F0',
-  paleSlate = '#A9A8A9',
   white = '#ffffff',
   alabaster = '#FAF9FA',
-  porcelain = '#E7E9EB',
   gray = '#C0C1C6',
 }
