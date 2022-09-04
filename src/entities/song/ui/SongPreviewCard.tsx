@@ -37,26 +37,26 @@ export const SongPreviewCard: React.FC<Props> = memo(
             source={{uri: cover}}
             resizeMode={FastImage.resizeMode.cover}>
             <View>{children}</View>
+            {showRating && (
+              <TopWrapperAbsolute>
+                <RatingBlock rating={rating} />
+              </TopWrapperAbsolute>
+            )}
+            {!!title && (
+              <TitleWrapper height={HEAR_BUTTON_SIZE}>
+                <TitleBold2 textAlign="center" color={Colors.black}>
+                  {title}
+                </TitleBold2>
+              </TitleWrapper>
+            )}
+            <BottomRightWrapperAbsolute>
+              <AnimatedHeartButton
+                isLiked={isLiked}
+                onPress={onHeartPress}
+                size={HEAR_BUTTON_SIZE}
+              />
+            </BottomRightWrapperAbsolute>
           </StyledImage>
-          {showRating && (
-            <TopWrapperAbsolute>
-              <RatingBlock rating={rating} />
-            </TopWrapperAbsolute>
-          )}
-          {!!title && (
-            <TitleWrapper height={HEAR_BUTTON_SIZE}>
-              <TitleBold2 textAlign="center" color={Colors.black}>
-                {title}
-              </TitleBold2>
-            </TitleWrapper>
-          )}
-          <BottomRightWrapperAbsolute>
-            <AnimatedHeartButton
-              isLiked={isLiked}
-              onPress={onHeartPress}
-              size={HEAR_BUTTON_SIZE}
-            />
-          </BottomRightWrapperAbsolute>
         </>
       );
     };
@@ -101,8 +101,8 @@ const TopWrapperAbsolute = styled.View({
 
 const BottomRightWrapperAbsolute = styled.View({
   position: 'absolute',
-  bottom: -4,
-  right: rem(16),
+  bottom: 0,
+  right: 0,
 });
 
 const TitleWrapper = styled.View<{height: number}>(({height}) => ({
@@ -111,7 +111,9 @@ const TitleWrapper = styled.View<{height: number}>(({height}) => ({
   opacity: 0.6,
   width: '100%',
   bottom: 0,
-  height: height,
+  height: height + rem(16),
+  justifyContent: 'center',
+  alignItems: 'center',
 }));
 
 const StyledPressable = styled.Pressable.attrs(() => ({

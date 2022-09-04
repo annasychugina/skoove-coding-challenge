@@ -64,6 +64,5 @@ export const TrackPlayer = () => {
 };
 
 const Container = styled.View({
-  flex: 1,
   alignItems: 'center',
 });

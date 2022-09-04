@@ -4,14 +4,14 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@entities/store';
 import {useRoute} from '@react-navigation/native';
 import type {RouteProp} from '@react-navigation/native';
-
+import {Container} from '@shared/ui/Container';
 import {useSetScreenOptions} from '@shared/hooks';
 import {selectSongById} from '@entities/song/model/songs';
 
 import styled from 'styled-components/native';
-import {Colors} from '@shared/lib/theme';
 import {TrackPlayer} from '@features/track-player';
 import {TrackRating} from '@features/track-rating';
+import {rem} from '@shared/ui/helpers';
 
 export const SongAudioScreen = () => {
   const route =
@@ -25,15 +25,15 @@ export const SongAudioScreen = () => {
 
   return (
     <Container>
-      <TrackPlayer />
-      <TrackRating />
+      <ContentContainer>
+        <TrackPlayer />
+        <TrackRating />
+      </ContentContainer>
     </Container>
   );
 };
 
-const Container = styled.SafeAreaView({
-  backgroundColor: Colors.white,
-  width: '100%',
-  height: '100%',
+const ContentContainer = styled.View({
+  marginTop: rem(20),
   alignItems: 'center',
 });

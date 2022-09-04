@@ -44,7 +44,8 @@ export const usePlayer = (track?: Song) => {
     if (!isSeeking && position && duration) {
       setSliderValue(position / duration);
     }
-  }, [isSeeking, position, duration]);
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
+  }, [position, duration]);
 
   const togglePlay = useCallback(() => {
     if (isPlaying) {

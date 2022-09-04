@@ -7,6 +7,8 @@ import {fetchSongsList} from '@entities/song/async/fetchSongsList';
 import {AppDispatch} from '@entities/store';
 import {SkoovinSongsList} from '@features/skoovin-songs-list';
 import {Container} from '@shared/ui/Container';
+import styled from 'styled-components/native';
+import {rem} from '@shared/ui/helpers';
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList>;
@@ -25,7 +27,13 @@ export const MainScreen = ({navigation}: Props) => {
 
   return (
     <Container>
-      <SkoovinSongsList onCardPress={handlePress} />
+      <ContentContainer>
+        <SkoovinSongsList onCardPress={handlePress} />
+      </ContentContainer>
     </Container>
   );
 };
+
+const ContentContainer = styled.View({
+  marginTop: rem(20),
+});
