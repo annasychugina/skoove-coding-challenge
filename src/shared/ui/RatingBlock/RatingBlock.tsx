@@ -4,15 +4,17 @@ import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
 import {AnimatedStar} from '@shared/ui/RatingBlock/AnimatedStart';
 import {Pressable} from 'react-native';
+import {TestProps} from '../../lib/utils/TestUtils';
+
+const DEFAULT_START_COUNT = 5;
+const DEFAULT_SIZE = rem(20);
+
 type Props = {
   rating: number;
   stars?: number;
   size?: number;
   onPress?: (newRating: number) => void;
-};
-
-const DEFAULT_START_COUNT = 5;
-const DEFAULT_SIZE = rem(20);
+} & TestProps;
 
 export const RatingBlock: FC<Props> = ({
   rating,
@@ -45,9 +47,4 @@ const StyledRow = styled.View({
 
 const StyledStarView = styled.View({
   padding: rem(4),
-});
-
-const StyledImage = styled.Image({
-  width: rem(20),
-  height: rem(20),
 });

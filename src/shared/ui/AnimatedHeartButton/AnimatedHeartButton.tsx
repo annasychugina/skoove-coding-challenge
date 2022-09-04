@@ -4,13 +4,14 @@ import styled from 'styled-components/native';
 import {Colors} from '@shared/lib/theme';
 import type {ComponentType} from 'react';
 import {rem} from '@shared/ui/helpers';
+import {TestProps} from '../../lib/utils/TestUtils';
 type Props = {
   isLiked: boolean | undefined;
   onPress?: () => void | Promise<void>;
   size?: number;
   showRipple?: boolean;
   disabled?: boolean;
-};
+} & TestProps;
 
 const heartFilled = require('@assets/heart-filled-black.png');
 const heartOutline = require('@assets/heart-line-black.png');
@@ -33,7 +34,7 @@ export const AnimatedHeartButton: React.FC<Props> = ({
   showRipple = false,
   disabled,
 }) => {
-  const value = useMemo(() => new Animated.Value(Number(isLiked)), []);
+  const value = useMemo(() => new Animated.Value(Number(isLiked)), [isLiked]);
   const didMount = useRef(false);
   const animateHeart = useCallback(() => {
     if (isLiked) {
@@ -49,6 +50,7 @@ export const AnimatedHeartButton: React.FC<Props> = ({
         ...timeConfig,
       }).start();
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
   }, [isLiked]);
 
   useEffect(() => {
@@ -57,6 +59,7 @@ export const AnimatedHeartButton: React.FC<Props> = ({
     } else {
       didMount.current = true;
     }
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
   }, [isLiked]);
 
   const style = useMemo(

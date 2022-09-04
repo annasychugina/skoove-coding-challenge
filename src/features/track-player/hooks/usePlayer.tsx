@@ -1,7 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
 import TrackPlayer, {
-  useTrackPlayerEvents,
-  Event,
   useProgress,
   usePlaybackState,
   State,
@@ -39,13 +37,14 @@ export const usePlayer = (track?: Song) => {
       setIsTrackPlayerInit(isInit);
     }
     startPlayer();
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (!isSeeking && position && duration) {
       setSliderValue(position / duration);
     }
-  }, [position, duration]);
+  }, [isSeeking, position, duration]);
 
   const togglePlay = useCallback(() => {
     if (isPlaying) {
@@ -54,11 +53,12 @@ export const usePlayer = (track?: Song) => {
       TrackPlayer.play();
     }
   }, [isPlaying]);
-  const slidingStarted = () => {
+
+  const onSlidingStart = () => {
     setIsSeeking(true);
   };
 
-  const slidingCompleted = async (value: number) => {
+  const onSlidingComplete = async (value: number) => {
     await TrackPlayer.seekTo(value * duration);
     setSliderValue(value);
     setIsSeeking(false);
@@ -69,8 +69,8 @@ export const usePlayer = (track?: Song) => {
     sliderValue,
     duration,
     position,
-    onSlidingStart: slidingStarted,
-    onSlidingComplete: slidingCompleted,
+    onSlidingStart,
+    onSlidingComplete,
     togglePlay,
   };
 };

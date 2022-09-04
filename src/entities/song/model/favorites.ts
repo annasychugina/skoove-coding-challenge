@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '@entities/store';
+import {RootState} from '../../store';
 
 type EntityID = string;
 

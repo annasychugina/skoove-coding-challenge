@@ -1,5 +1,6 @@
 import TrackPlayer, {Event, State} from 'react-native-track-player';
 
+// Copy from example https://github.com/doublesymmetry/react-native-track-player/blob/eae67c7bdd/example/src/services/PlaybackService.ts
 export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     TrackPlayer.pause();

@@ -1,13 +1,13 @@
-import React, {memo, PropsWithChildren} from 'react';
+import React, {memo} from 'react';
 import {View} from 'react-native';
 import {Colors} from '@shared/lib/theme';
 import {Typography} from '@shared/ui/Typography';
-import {Song} from '@entities/song/model/songs';
+import {Song} from '../model/songs';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
 import {RatingBlock} from '@shared/ui/RatingBlock';
-import {AnimatedHeartButton} from '@shared/ui/AnimatedHeartButton/AnimatedHeartButton';
+import {AnimatedHeartButton} from '@shared/ui/AnimatedHeartButton';
 const {TitleBold2} = Typography;
 
 type Props = Song & {
@@ -82,11 +82,11 @@ export const SongPreviewCard: React.FC<Props> = memo(
   },
 );
 
-export const Container = styled.View({
+const Container = styled.View({
   paddingVertical: rem(6),
 });
 
-export const StyledImage = styled(FastImage)({
+const StyledImage = styled(FastImage)({
   width: rem(340),
   height: rem(340),
   justifyContent: 'center',

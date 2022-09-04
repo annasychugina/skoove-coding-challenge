@@ -1,7 +1,7 @@
 import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
-import {Song} from '@entities/song/model/songs';
-import {addFavorite, removeFavorite} from '@entities/song/model/favorites';
+import {Song} from '../model/songs';
+import {addFavorite, removeFavorite} from '../model/favorites';
 
 export const useFavorite = () => {
   const dispatch = useDispatch();

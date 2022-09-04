@@ -5,6 +5,6 @@ export const useSetScreenOptions = <T>(options: T, deps: readonly any[]) => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions(options);
-    // eslint-disable-next-line
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
   }, deps);
 };

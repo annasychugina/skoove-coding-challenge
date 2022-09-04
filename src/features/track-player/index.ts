@@ -1,0 +1,1 @@
+export {TrackPlayer} from './TrackPlayer';

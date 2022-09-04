@@ -4,7 +4,7 @@ import {Colors} from '@shared/lib/theme';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
 import {Typography} from '@shared/ui/Typography';
-import {formatTime} from '../../utils';
+import {formatTime} from '../utils';
 
 const {TitleBold2} = Typography;
 
@@ -47,5 +47,5 @@ const StyledSlider = styled(Slider)({
 const LabelTextContainer = styled.View({
   flexDirection: 'row',
   justifyContent: 'center',
-  marginBottom: rem(10)
+  marginBottom: rem(10),
 });

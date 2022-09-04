@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import {rem} from '../helpers';
+import {TestProps} from '../../lib/utils/TestUtils';
 
 type Props<T> = FlatListProps<T> & {
   style?: StyleProp<ViewStyle>;
@@ -15,7 +16,7 @@ type Props<T> = FlatListProps<T> & {
   data: T[];
   renderItem: ListRenderItem<T>;
   keyExtractor: (item: T, index: number) => string;
-};
+} & TestProps;
 
 export const ItemsList = <T,>({
   style,
