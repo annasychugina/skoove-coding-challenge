@@ -6,7 +6,7 @@ import {Song} from '@entities/song/model/songs';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import {rem} from '@shared/ui/helpers';
-import {SmallRating} from '@shared/ui/RatingBlock/SmallRating';
+import {RatingBlock} from '@shared/ui/RatingBlock';
 import {AnimatedHeartButton} from '@shared/ui/AnimatedHeartButton/AnimatedHeartButton';
 const {TitleBold2} = Typography;
 
@@ -17,7 +17,7 @@ type Props = Song & {
 };
 
 export const SongPreviewCard = memo(
-  ({title, cover, isLiked, onPress, onHeartPress}: Props) => {
+  ({title, cover, isLiked, onPress, rating, onHeartPress}: Props) => {
     return (
       <Container testID="songCard">
         <StyledPressable onPress={onPress}>
@@ -26,7 +26,7 @@ export const SongPreviewCard = memo(
             resizeMode={FastImage.resizeMode.cover}
           />
           <TopWrapperAbsolute>
-            <SmallRating rating={2} />
+            <RatingBlock rating={rating} />
           </TopWrapperAbsolute>
           <TitleWrapper>
             <TitleBold2 textAlign="center" color={Colors.black}>

@@ -1,12 +1,19 @@
-import {createSlice, createEntityAdapter} from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createEntityAdapter,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import {EntityState} from '@reduxjs/toolkit';
 import {fetchSongsList} from '../async/fetchSongsList';
 import {ApiSong} from '@shared/api/models';
 import {RootState} from '../../store';
 import {uuidv4} from '@shared/lib/utils/uuid';
 
+type EntityID = string;
+
 export type Song = ApiSong & {
-  id: string;
+  id: EntityID;
+  rating: number;
 };
 const adapter = createEntityAdapter<Song>();
 
@@ -21,7 +28,25 @@ const songs = createSlice({
     isLoading: false,
     error: '',
   }),
-  reducers: {},
+  reducers: {
+    setRating: (
+      state,
+      {payload}: PayloadAction<{songId: EntityID; rating: number}>,
+    ) => {
+      const existingSong = adapter
+        .getSelectors()
+        .selectById(state, payload.songId);
+
+      if (existingSong) {
+        adapter.updateOne(state, {
+          id: existingSong.id,
+          changes: {
+            rating: payload.rating,
+          },
+        });
+      }
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchSongsList.fulfilled, (state, {payload}) => {
@@ -33,6 +58,7 @@ const songs = createSlice({
               return {
                 id: uuidv4(),
                 ...item,
+                rating: 0,
               };
             }),
           );
@@ -57,3 +83,5 @@ export const {
   selectAll: selectAllSongs,
   selectEntities: selectAllSongsEntities,
 } = adapter.getSelectors<RootState>(state => state.songs);
+
+export const {setRating} = songs.actions;

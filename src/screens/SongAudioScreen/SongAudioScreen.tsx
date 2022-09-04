@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {EScreens, RootStackParamList} from '@shared/config';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchSongsList} from '@entities/song/async/fetchSongsList';
 import {AppDispatch, RootState} from '@entities/store';
-import {SkoovinSongsList} from '@features/skoovin-songs-list';
 import {useRoute} from '@react-navigation/native';
 import type {RouteProp} from '@react-navigation/native';
 
 import {useSetScreenOptions} from '@shared/hooks';
-import {selectSongById} from '@entities/song/model/songs';
+import {selectSongById, setRating} from '@entities/song/model/songs';
 import {Container} from '@shared/ui/Container';
+import {RatingBlock} from '@shared/ui/RatingBlock';
+import {rem} from '@shared/ui/helpers';
 
 export const SongAudioScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,15 +21,21 @@ export const SongAudioScreen = () => {
     selectSongById(state, songId),
   );
 
+  const songRating = songItem?.rating ?? 0;
+
   useSetScreenOptions({title: songItem?.title}, [songId]);
 
-  useEffect(() => {
-    dispatch(fetchSongsList());
-  }, [dispatch]);
+  const handleStarPress = (rating: number) => {
+    dispatch(setRating({songId, rating}));
+  };
 
   return (
     <Container>
-      <SkoovinSongsList />
+      <RatingBlock
+        rating={songRating}
+        onPress={handleStarPress}
+        size={rem(32)}
+      />
     </Container>
   );
 };
