@@ -4,4 +4,5 @@ export enum Colors {
   white = '#ffffff',
   alabaster = '#FAF9FA',
   gray = '#C0C1C6',
+  frenchGray = '#C0C1C6',
 }

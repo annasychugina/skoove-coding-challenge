@@ -9,7 +9,7 @@ import {selectSongById, setRating} from '@entities/song/model/songs';
 import {RatingBlock} from '@shared/ui/RatingBlock';
 import {rem} from '@shared/ui/helpers';
 
-const RATING_BLOCK_SIZE = rem(32);
+const RATING_BLOCK_SIZE = rem(40);
 
 export const TrackRating = () => {
   const dispatch = useDispatch<AppDispatch>();

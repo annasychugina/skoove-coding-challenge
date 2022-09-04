@@ -31,7 +31,7 @@ export const AnimatedHeartButton: React.FC<Props> = ({
   onPress,
   isLiked = false,
   size = DEFAULT_SIZE,
-  showRipple = false,
+  showRipple = true,
   disabled,
 }) => {
   const value = useMemo(() => new Animated.Value(Number(isLiked)), [isLiked]);
@@ -110,7 +110,7 @@ const StyledPressable = styled<ComponentType<StyledPressable>>(Pressable).attrs(
       ? {
           borderless: true,
           radius: 20,
-          color: Colors.gray,
+          color: Colors.frenchGray,
         }
       : undefined,
   }),
